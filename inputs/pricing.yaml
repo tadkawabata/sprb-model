@@ -1,0 +1,9 @@
+# Pricing. All [assumption]; comps: Brineura list ~$702k at launch / ~$486k net, H.C. Wainwright ~$800k.
+
+us_wac_k: {bear: 650, base: 750, bull: 850}          # $K per patient-year
+gross_to_net: {bear: 0.35, base: 0.25, bull: 0.20}
+annual_price_increase: {bear: 0.0, base: 0.02, bull: 0.03}
+
+exus_sales_pct_of_us: {bear: 0.30, base: 0.60, bull: 1.00}   # ex-US end-market sales vs US (same point in launch curve)
+exus_mode: {bear: partner, base: direct, bull: direct}       # partner -> Spruce books a royalty only
+exus_partner_royalty: 0.20

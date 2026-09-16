@@ -1,0 +1,30 @@
+# MPS IIIB (Sanfilippo type B) US patient funnel. All [assumption] unless noted.
+# Any value written as {bear, base, bull} is a scenario input and shows up in the tornado.
+
+us_live_births: 3600000
+incidence_per_100k: {bear: 0.21, base: 0.36, bull: 0.52}   # UK-like / ~1:280k (Myriad) / global est. (PMC)
+untreated_life_years: {bear: 15, base: 17, bull: 20}       # avg living span of a birth cohort -> prevalent pool
+
+# Prevalent pool at launch
+dx_rate_prevalent: {bear: 0.60, base: 0.70, bull: 0.85}
+eligible_frac_prevalent: {bear: 0.50, base: 0.60, bull: 0.75}   # before advanced neuro disease
+
+# Incident cohorts after launch (awareness rises post-approval)
+dx_rate_incident_mature: {bear: 0.70, base: 0.85, bull: 0.95}
+years_to_mature_dx: {bear: 8, base: 6, bull: 5}
+eligible_frac_incident: {bear: 0.60, base: 0.75, bull: 0.85}    # diagnosed early enough to benefit
+
+# Uptake: share of the eligible, untreated pool that starts therapy each year (logistic ramp)
+annual_start_rate_mature: {bear: 0.50, base: 0.65, bull: 0.80}
+start_rate_at_launch: {bear: 0.20, base: 0.30, bull: 0.40}     # fraction of mature rate in launch year (known, waiting patients)
+start_ramp_years: {bear: 3.0, base: 2.0, bull: 1.5}
+eligibility_loss_rate: {bear: 0.30, base: 0.25, bull: 0.20}      # untreated eligible patients progressing out per year
+
+# Survival extension on therapy — the single biggest driver of peak (accumulation effect)
+years_on_therapy: {bear: 15, base: 25, bull: 30}   # mean; annual attrition = 1 / years
+
+# Patients already on drug via studies 201/202/401 (22 dosed, ~6 yrs follow-up [src]) and the ~10-patient
+# EAP [src] who roll onto commercial supply in the US at launch
+rollover_patients_at_launch: {bear: 8, base: 12, bull: 16}
+
+compliance: 0.90

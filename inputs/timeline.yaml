@@ -1,0 +1,27 @@
+# Regulatory timeline, probability of success, discounting, valuation settings.
+
+valuation_date: 2026-09-16
+horizon_end: 2045
+bla_submission: 2026-12-15              # [src] guided Q4 2026
+
+approval: {bear: 2028-01-01, base: 2027-07-01, bull: 2027-05-15}   # bear = CMC CRL + resubmission
+launch_lag_years: 0.25                  # treating-center / ICV reservoir setup
+probability_of_approval: {bear: 0.65, base: 0.80, bull: 0.90}      # Jones uses 85%
+discount_rate: {bear: 0.14, base: 0.12, bull: 0.10}
+
+us_exclusivity_years: 12                # BLA reference-product exclusivity (orphan = 7)
+exus_launch_lag_years: {bear: 2.0, base: 1.5, bull: 1.0}
+exus_exclusivity_years: 10              # EU orphan market exclusivity
+post_loe_erosion: {bear: 0.25, base: 0.15, bull: 0.10}   # also used as terminal decline rate
+terminal_value: true                    # Gordon growth on final-year FCF at g = -post_loe_erosion
+
+scenario_weights: [0.25, 0.50, 0.25]    # bear, base, bull
+
+multiples_grid:                         # EV / peak worldwide sales, applied to a de-risked (approved) asset
+  peak_sales: [150, 300, 500, 750]
+  multiples: [3, 4, 5, 6]
+  royalty_haircut: 0.10                 # trim vs an unencumbered asset
+
+sensitivity:
+  incidence_per_100k: [0.21, 0.28, 0.36, 0.44, 0.52]
+  us_wac_k: [550, 650, 750, 850, 950]

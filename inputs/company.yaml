@@ -1,0 +1,65 @@
+# Spruce Biosciences (SPRB) — cap table, balance sheet, operating costs, financing.
+# Units: $M unless noted; share counts are raw shares (post 1:75 reverse split of Aug 2025).
+# [src] = SEC filing; [assumption] = editable model input.
+
+price: 55.20                 # [src] 2026-09-16 close (Nasdaq)
+price_date: 2026-09-16
+
+shares:
+  basic: 2874013             # [src] Q2'26 10-Q cover page, as of 2026-08-10 (= 2,752,810 at 6/30 + 121,203 Aug placement)
+  rsus: 127084               # [src] 10-Q note 11, 6/30/26
+  options: 49174             # [src] 6/30/26; strikes undisclosed -> counted in full (conservative)
+  espp: 445                  # [src] estimated ESPP shares, 6/30/26
+  warrants:
+    - name: Avenue lender warrant
+      shares: 64000          # [src] $3.2M worth at $50
+      strike: 50.00
+      expires: 2031-01-31
+      free_on_change_of_control: true   # [src] lender receives the shares without paying strike on a CoC
+    - name: Feb 2023 PIPE standard warrants
+      shares: 169147         # [src]
+      strike: 297.00         # [src] $3.96 pre-split x 75
+      expires: 2028-02-17
+      free_on_change_of_control: false
+  convertibles:
+    - name: Avenue conversion option
+      principal: 4.0         # [src] up to $4.0M of loan principal
+      conversion_price: 60.00
+
+cash:
+  as_of: 2026-06-30
+  balance: 96.3              # [src] cash & equivalents
+  subsequent_inflows: 5.5    # [src] Aug 7, 2026 private placement (121,203 sh @ $45.38)
+  quarterly_burn: 15.5       # [assumption] ~H1'26 operating cash burn $30.9M / 2; used only to roll cash to valuation date
+
+debt:
+  principal: 15.0            # [src] Avenue Tranche 1 (balance-sheet $7.1M is net of $9.5M discount)
+  final_payment: 1.6         # [src] Avenue final payment
+  rate: 0.1225               # [src] stated rate at 6/30/26 (not modeled in FCF; debt taken at face in the bridge)
+  maturity: 2029-07-01
+
+operating_costs:             # [assumption] unless noted
+  rd_by_year: {2026: 49, 2027: 50, 2028: 40, 2029: 30}   # Q2'26 R&D run-rate $12.2M/qtr [src]; BLA, TrAnsform, EAP, PPQ
+  rd_thereafter: 15
+  ga_by_year: {2026: 17, 2027: 20}                        # Q2'26 G&A run-rate $4.3M/qtr [src]
+  ga_thereafter: 22
+  ga_growth: 0.03
+  us_commercial_sga_prelaunch: 15   # annual rate during the 12 months before US launch
+  us_commercial_sga: 30             # annual rate from US launch
+  exus_sga_direct: 12               # annual rate from 6 months before ex-US launch (direct mode only)
+  sga_growth: 0.03
+  cogs_pct: {bear: 0.15, base: 0.12, bull: 0.10}
+  failure_wind_down: 10             # one-time cost if not approved
+
+acquirer_view:                      # [assumption] strategic buyer (BioMarin/BioCryst-type) owns the asset from US approval
+  ga_synergy: 1.0                   # standalone G&A eliminated
+  sga_synergy: {bear: 0.30, base: 0.50, bull: 0.60}   # share of commercial SG&A absorbed by existing infrastructure
+  tax_rate: 0.21                    # buyer pays full tax; Spruce NOLs ignored
+
+financing:
+  pre_approval_raise:               # [assumption] runway only into 2H27 [src]
+    enabled: true
+    date: 2027-03-31
+    gross: {bear: 150, base: 100, bull: 75}
+    price: {bear: 35.0, base: 50.0, bull: 60.0}
+    fees_pct: 0.07
