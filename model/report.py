@@ -5,6 +5,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
+from matplotlib.ticker import MaxNLocator  # noqa: E402
 
 from .config import ROOT, SCENARIOS, load_inputs, resolve  # noqa: E402
 from .scenarios import (per_share_acquirer, run_all, sensitivity,  # noqa: E402
@@ -38,6 +39,7 @@ def charts(results: dict, tornado_rows: list[dict]) -> None:
                 label=s, color=COLORS[s], linewidth=2)
     ax.set(title="US patients on therapy (year-end)", xlabel="", ylabel="patients")
     ax.grid(alpha=0.3)
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     ax.legend()
     fig.tight_layout()
     fig.savefig(OUT / "charts" / "patients.png", dpi=150)
@@ -50,6 +52,7 @@ def charts(results: dict, tornado_rows: list[dict]) -> None:
         ax.plot(years, [row["us_sales"] for row in r["revenue"]], color=COLORS[s], linewidth=1, linestyle="--")
     ax.set(title="Net sales, $M (solid = worldwide, dashed = US)", ylabel="$M")
     ax.grid(alpha=0.3)
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     ax.legend()
     fig.tight_layout()
     fig.savefig(OUT / "charts" / "revenue.png", dpi=150)
