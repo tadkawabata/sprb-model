@@ -12,7 +12,7 @@ python run.py          # regenerates outputs/summary.md and outputs/charts/
 python -m pytest -q
 ```
 
-Read the results in **[outputs/summary.md](outputs/summary.md)**.
+Read the results in **[outputs/summary.md](outputs/summary.md)**. For a full walkthrough (reading the output, editing inputs, refreshing after filings, what-ifs), see **[docs/GUIDE.md](docs/GUIDE.md)**.
 
 ## Layout
 
